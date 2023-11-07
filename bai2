@@ -1,0 +1,39 @@
+class GiaiTich:
+    def __init__(self, f):
+        self.f = f
+
+    def tinh_dao_ham(self, x):
+        h = 1e-6  # Độ sai số
+        df = (self.f(x + h) - self.f(x)) / h
+        return df
+
+    def tinh_tich_phan(self, a, b):
+        n = 1000  # Số lượng mẫu
+        h = (b - a) / n
+        integral = 0
+
+        for i in range(n):
+            x = a + i * h
+            integral += self.f(x) * h
+
+        return integral
+
+# Ví dụ sử dụng
+def main():
+    # Định nghĩa hàm f(x)
+    def f(x):
+        return x**2 + 2*x + 1
+
+    # Tạo đối tượng GiaiTich
+    gt = GiaiTich(f)
+
+    # Tính đạo hàm tại x = 2
+    df = gt.tinh_dao_ham(2)
+    print("Đạo hàm:", df)
+
+    # Tính tích phân từ a = 0 đến b = 5
+    integral = gt.tinh_tich_phan(0, 5)
+    print("Tích phân:", integral)
+
+if __name__ == "__main__":
+    main()
