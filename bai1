@@ -1,0 +1,43 @@
+import numpy as np
+
+def giai_he_pt_tuyen_tinh(A, b):
+    try:
+        n = len(A)
+        x = np.linalg.solve(A, b)
+        return x
+    except np.linalg.LinAlgError:
+        return None
+
+def nhap_he_pt():
+    n = int(input("Nhập số lượng phương trình: "))
+    A = []
+    b = []
+
+    print("Nhập ma trận hệ số A:")
+    for i in range(n):
+        row = []
+        for j in range(n):
+            a_ij = float(input(f"A[{i+1}][{j+1}]: "))
+            row.append(a_ij)
+        A.append(row)
+
+    print("Nhập vector b:")
+    for i in range(n):
+        b_i = float(input(f"b[{i+1}]: "))
+        b.append(b_i)
+
+    return A, b
+
+def main():
+    A, b = nhap_he_pt()
+    x = giai_he_pt_tuyen_tinh(A, b)
+
+    if x is not None:
+        print("Nghiệm của hệ phương trình:")
+        for i, value in enumerate(x):
+            print(f"x[{i+1}] = {value}")
+    else:
+        print("Hệ phương trình không có nghiệm.")
+
+if __name__ == "__main__":
+    main()
