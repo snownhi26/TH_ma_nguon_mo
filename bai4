@@ -1,0 +1,19 @@
+import pandas as pd
+
+# Đường dẫn tới file CSV
+csv_file = "https://raw.githubusercontent.com/your_username/your_repository/your_branch/your_file.csv"
+
+# Đọc dữ liệu từ file CSV
+data = pd.read_csv(csv_file)
+
+# Thực hiện các thao tác phân tích và tạo báo cáo
+# Ví dụ: Tính tổng điểm và điểm trung bình của từng học sinh
+data['Total'] = data['Math'] + data['Physics'] + data['Chemistry']
+data['Average'] = data['Total'] / 3
+
+# Sắp xếp theo điểm trung bình giảm dần
+sorted_data = data.sort_values(by='Average', ascending=False)
+
+# Tạo báo cáo
+report = sorted_data[['StudentID', 'Name', 'Math', 'Physics', 'Chemistry', 'Total', 'Average']]
+print(report)
