@@ -1,0 +1,30 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Tạo dữ liệu tín hiệu mẫu
+fs = 1000  # Tần số lấy mẫu (Hz)
+t = np.arange(0, 1, 1/fs)  # Trục thời gian từ 0 đến 1 giây
+f1 = 10  # Tần số tín hiệu (Hz)
+x = np.sin(2*np.pi*f1*t)  # Tín hiệu sin với tần số f1
+
+# Lọc tín hiệu
+filtered_x = signal.convolve(x, b, mode='same')
+
+# Thực hiện biến đổi Fourier
+X = np.fft.fft(x)
+freq = np.fft.fftfreq(len(x), 1/fs)
+
+# Vẽ biểu đồ tín hiệu và biến đổi Fourier
+fig, ax = plt.subplots(2, 1, figsize=(8, 6))
+ax[0].plot(t, x)
+ax[0].set_xlabel('Thời gian (s)')
+ax[0].set_ylabel('Amplitude')
+ax[0].set_title('Tín hiệu mẫu')
+
+ax[1].stem(freq, np.abs(X))
+ax[1].set_xlabel('Tần số (Hz)')
+ax[1].set_ylabel('Biên độ')
+ax[1].set_title('Biến đổi Fourier')
+
+plt.tight_layout()
+plt.show()
