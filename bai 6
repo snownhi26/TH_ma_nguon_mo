@@ -1,0 +1,27 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+
+# Đọc dữ liệu từ file CSV
+data = pd.read_csv('Student_Performance.csv')
+
+# Chọn các đặc trưng (features) và nhãn (label)
+features = data[['study_hours', 'sleep_hours']]
+label = data['test_score']
+
+# Chia dữ liệu thành tập huấn luyện và tập kiểm tra
+X_train, X_test, y_train, y_test = train_test_split(features, label, test_size=0.2, random_state=42)
+
+# Khởi tạo mô hình hồi quy tuyến tính
+model = LinearRegression()
+
+# Huấn luyện mô hình
+model.fit(X_train, y_train)
+
+# Dự đoán trên tập kiểm tra
+y_pred = model.predict(X_test)
+
+# Đánh giá mô hình bằng độ đo Mean Squared Error (MSE)
+mse = mean_squared_error(y_test, y_pred)
+print("Mean Squared Error:", mse)
