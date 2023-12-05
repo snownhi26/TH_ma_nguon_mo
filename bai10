@@ -1,0 +1,34 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Đường dẫn đến tệp CSV
+csv_file = "path/to/Student_Performance.csv"
+
+# Đọc dữ liệu từ tệp CSV vào một DataFrame
+data = pd.read_csv(csv_file)
+
+# Hiển thị 5 dòng đầu tiên của dữ liệu
+print("Thông tin dữ liệu:")
+print(data.head())
+
+# Tính toán giá trị lớn nhất, nhỏ nhất và trung bình của các cột
+max_scores = data.max()
+min_scores = data.min()
+avg_scores = data.mean()
+
+print("\nCác giá trị lớn nhất:")
+print(max_scores)
+
+print("\nCác giá trị nhỏ nhất:")
+print(min_scores)
+
+print("\nCác giá trị trung bình:")
+print(avg_scores)
+
+# Vẽ đồ thị phân phối điểm của một cột bất kỳ (ví dụ: "math_score")
+column_name = "math_score"
+plt.hist(data[column_name], bins=10)
+plt.xlabel(column_name)
+plt.ylabel("Số lượng học sinh")
+plt.title("Phân phối điểm " + column_name)
+plt.show()
