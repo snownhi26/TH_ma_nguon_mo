@@ -1,0 +1,32 @@
+import cv2
+
+def enhance_image(image_path):
+    # Đọc ảnh từ đường dẫn
+    image = cv2.imread(image_path)
+
+    # Chuyển đổi ảnh sang không gian màu LAB
+    lab_image = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
+
+    # Tách các kênh màu
+    l_channel, a_channel, b_channel = cv2.split(lab_image)
+
+    # Áp dụng Equalize Histogram vào kênh L (độ sáng)
+    l_channel = cv2.equalizeHist(l_channel)
+
+    # Kết hợp lại các kênh màu
+    enhanced_lab_image = cv2.merge((l_channel, a_channel, b_channel))
+
+    # Chuyển đổi lại sang không gian màu BGR
+    enhanced_image = cv2.cvtColor(enhanced_lab_image, cv2.COLOR_LAB2BGR)
+
+    # Hiển thị ảnh gốc và ảnh sau khi tăng cường
+    cv2.imshow("Original Image", image)
+    cv2.imshow("Enhanced Image", enhanced_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+# Đường dẫn đến ảnh cần tăng cường
+image_path = "path/to/your/image.jpg"
+
+# Gọi hàm tăng cường ảnh
+enhance_image(image_path)
